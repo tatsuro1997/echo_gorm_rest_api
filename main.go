@@ -12,10 +12,10 @@ func main() {
 	defer db.Close()
 
 	e.GET("users", controller.GetUsers)
-	e.GET("user/:id", controller.GetUser)
-	e.POST("/users", controller.CreateUser)
-	e.PUT("/users/:id", controller.UpdateUser)
-	e.DELETE("/users/:id", controller.DeleteUser)
+	e.GET("users/:id", controller.GetUser)
+	e.POST("users", controller.CreateUser)
+	e.PATCH("users/:id", controller.UpdateUser)
+	e.DELETE("users/:id", controller.DeleteUser)
 
 	e.GET("posts", controller.GetPosts)
 	e.GET("post/:id", controller.GetPost)
