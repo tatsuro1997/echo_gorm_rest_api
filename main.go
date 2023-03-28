@@ -18,7 +18,7 @@ func main() {
 	e.DELETE("users/:id", controller.DeleteUser)
 
 	e.GET("posts", controller.GetPosts)
-	e.GET("post/:id", controller.GetPost)
+	e.GET("posts/:id", controller.GetPost)
 	e.POST("users/:user_id/posts", controller.CreatePost)
 	e.Logger.Fatal(e.Start(":8080"))
 }
