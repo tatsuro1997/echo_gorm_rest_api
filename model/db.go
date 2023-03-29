@@ -24,5 +24,6 @@ func init() {
 		log.Fatalln(dsn + "database can't connect")
 	}
 
-	DB.AutoMigrate(&User{}, &Post{})
+	DB.AutoMigrate(&User{})
+	DB.Migrator().CreateConstraint(&Post{}, "Users_pkey PRIMARY KEY")
 }

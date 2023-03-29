@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"echo_gorm_rest_api/model"
+	"github.com/tatsuro1997/echo_gorm_rest_api/model"
 
 	"github.com/labstack/echo/v4"
 )

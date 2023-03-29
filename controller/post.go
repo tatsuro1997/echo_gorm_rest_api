@@ -2,8 +2,9 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
-	"echo_gorm_rest_api/model"
+	"github.com/tatsuro1997/echo_gorm_rest_api/model"
 
 	"github.com/labstack/echo/v4"
 )
@@ -25,9 +26,31 @@ func GetPost(c echo.Context) error {
 
 func CreatePost(c echo.Context) error {
 	post := model.Post{}
-	if err := c.Bind(&post); err != nil {
-		return c.String(http.StatusBadRequest, err.Error())
+	userID, err := strconv.ParseUint(c.Param("user_id"), 10, 64)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	model.DB.Create(&post)
+
+	post.UserID = uint(userID)
+	if err := c.Bind(&post); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+
+	res := model.DB.Create(&post)
+	if res.Error != nil {
+		return c.JSON(http.StatusBadRequest, res.Error.Error())
+	}
 	return c.JSON(http.StatusCreated, post)
+}
+
+func UpdatePost(c echo.Context) error {
+	post := model.Post{}
+	if err := c.Bind(&post); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+	res := model.DB.Save(&post)
+	if res.Error != nil {
+		return c.JSON(http.StatusBadRequest, res.Error.Error())
+	}
+	return c.JSON(http.StatusOK, post)
 }
