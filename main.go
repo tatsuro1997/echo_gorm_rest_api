@@ -1,9 +1,9 @@
 package main
 
 import (
-	"echo_gorm_rest_api/controller"
-	"echo_gorm_rest_api/model"
 	"github.com/labstack/echo/v4"
+	"github.com/tatsuro1997/echo_gorm_rest_api/controller"
+	"github.com/tatsuro1997/echo_gorm_rest_api/model"
 )
 
 func main() {
@@ -20,5 +20,6 @@ func main() {
 	e.GET("posts", controller.GetPosts)
 	e.GET("posts/:id", controller.GetPost)
 	e.POST("users/:user_id/posts", controller.CreatePost)
+	e.PATCH("users/:user_id/posts/:id", controller.UpdatePost)
 	e.Logger.Fatal(e.Start(":8080"))
 }

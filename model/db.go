@@ -25,5 +25,6 @@ func init() {
 	}
 
 	DB.AutoMigrate(&User{})
-	DB.Migrator().CreateConstraint(&Post{}, "Users_pkey PRIMARY KEY")
+	DB.AutoMigrate(&Post{})
+	// DB.Migrator().CreateConstraint(&User{}, "Posts")
 }

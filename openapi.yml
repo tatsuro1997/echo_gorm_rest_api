@@ -30,7 +30,7 @@ paths:
                     type: string
                     format: date-time
     post:
-      description: ユーザー投稿
+      description: ユーザー登録
       operationId: UserCreate
       requestBody:
         content:
@@ -228,6 +228,57 @@ paths:
           schema:
             type: integer
           description: ユーザーID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - content
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  title:
+                    type: string
+                  context:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+  "/users/{user_id}/posts/{id}":
+    patch:
+      description: 投稿更新
+      operationId: PostUpdate
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ユーザーID
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 投稿ID
       requestBody:
         content:
           application/json:
