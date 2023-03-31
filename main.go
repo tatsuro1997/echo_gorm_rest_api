@@ -2,12 +2,15 @@ package main
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/tatsuro1997/echo_gorm_rest_api/controller"
 	"github.com/tatsuro1997/echo_gorm_rest_api/model"
 )
 
 func main() {
 	e := echo.New()
+	e.Use(middleware.CORS())
+
 	db, _ := model.DB.DB()
 	defer db.Close()
 
